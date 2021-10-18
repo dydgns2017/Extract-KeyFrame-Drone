@@ -28,6 +28,12 @@ conda install matplotlib numpy -y
 python KeyFrameExtract.py sample.mp4
 ```
 
+## ffmpeg command
+
+```bash
+ffmpeg -i filename -q:v 2 -vf select="eq(pict_type\,PICT_TYPE_I)" -vsync 0 frame1%03d.jpg
+```
+
 ## Reference
 
 - (Key Frame Extraction From Video),https://medium.com/@myworldsharma.jay/key-frame-extraction-from-video-9445564eb8ed
