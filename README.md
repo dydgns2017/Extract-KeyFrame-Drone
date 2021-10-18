@@ -9,13 +9,24 @@ so this code purpose extraction important frame of video ( format : mp4, mov )
 
 and then you should be know this code not working your video data so i recommend modify this code if try execution
 
-## Use Environment
+## Setting Environment
 
-- settings...
+```python
+conda create -n ExtractKeyFrame python=3.8
+conda activate ExtractKeyFrame
+conda install -c conda-forge opencv -y
+conda install matplotlib numpy -y
+```
 
 ## How to use it
 
-- settings...
+
+```python
+# python KeyFrameExtract.py filename
+
+## sample
+python KeyFrameExtract.py sample.mp4
+```
 
 ## Reference
 
