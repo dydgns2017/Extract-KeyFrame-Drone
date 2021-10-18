@@ -7,11 +7,12 @@ import cv2
 from matplotlib import pyplot as plt
 import numpy as np
 import glob
+import pathlib
 ## init settings
 # set variable
 # check enviroment
-outputFolderName = "resultFolder"
-videoFileName = sys.argv[1]
+currentlyPath = str(pathlib.Path().resolve())
+outputFolderName = currentlyPath + "/resultFolder"
 ## openCV variable set
 OPENCV_METHODS = (
     (cv2.HISTCMP_CORREL ),
@@ -25,28 +26,30 @@ def Initialize():
         print("you have to use like this__")
         print("python KeyFrameExtract.py sample.mp4")
         exit()
-    if ( not os.path.exists(outputFolderName) ):
+    if ( not os.path.exists(outputFolderName)):
         os.makedirs(outputFolderName)
-    if ( not os.listdir(outputFolderName) ):
+    if ( len(os.listdir(outputFolderName)) != 0 ):
         print("** ERROR Result Directory is not empty so you should be backup or delete data in resultFolder")
         exit()
 
 def Extraction():
     print("video file extraction running...")
-    video = cv2.VideoCapture(videoFileName)
+    video = cv2.VideoCapture("{0}/{1}".format(currentlyPath, videoFileName))
     frame_list = []
     cframe = 0
     while(True):
-        ret, frame = video.read()
-        filename = "${outputFolderName}/{0}.jpg".format(str(cframe))
-        cv2.imwrite(filename, frame)
-        frame_list.append(frame)
-        cframe += 1
-        if not ret:
+        try:
+            ret, frame = video.read()
+            fname = str(cframe)
+            filename = "{0}/{1}.jpg".format(outputFolderName, fname)
+            cv2.imwrite(filename, frame)
+            frame_list.append(frame)
+            cframe += 1
+        except:
             break
     images = {}
     index = {}
-    for imagePath in glob.glob('./${outputFolderName}/*.jpg'):
+    for imagePath in glob.glob('{0}/*.jpg'.format(outputFolderName)):
         filename = imagePath[imagePath.rfind("/") + 1:]
         image = cv2.imread(imagePath,1)
         images[filename] = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -67,10 +70,9 @@ def Extraction():
         
     for (k,hist) in index.items():
         mean__ = np.mean(index[k], dtype=np.float64)
-
     for (k,hist) in index.items():
         variance = np.var(index[k], dtype=np.float64)
-
+    
     print("variance", variance)
             
     standard_deviation = np.sqrt(variance)
@@ -92,10 +94,11 @@ def Extraction():
             if (d > th):
                     name = './keyframes/' + str(cframe1) + '.jpg'
                     print("creating" +name)
-                    cv2.imwrite(name, keyframe )
+                    cv2.imwrite(name, keyframe)
                     cframe1+=1
 
-if __name__ == "main":
-    print("Extraction KeyFrame from video" + videoFileName )
+if __name__ == "__main__":
     Initialize()
+    videoFileName = sys.argv[1]
+    print("Extraction KeyFrame from video" + videoFileName )
     Extraction()
