@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 # extract frames from multiple videos
 # google search key word : How to extract frames from all videos in a folder using ffmpeg
 # code reference : https://stackoverflow.com/questions/13408493/an-and-operator-for-an-if-statement-in-bash
