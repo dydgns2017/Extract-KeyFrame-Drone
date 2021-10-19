@@ -9,7 +9,7 @@ if [ "$1" == '' && "$1" != 'MP4' && "$2" != 'MOV' ]; then
     exit;
 fi
 
-fileext = $1;
+fileext=$1;
 
 resultfolder="frames";
 [ ! -d "$resultfolder" ] && mkdir "$resultfolder";
