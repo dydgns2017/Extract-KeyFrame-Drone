@@ -4,13 +4,12 @@
 # code reference : https://stackoverflow.com/questions/13408493/an-and-operator-for-an-if-statement-in-bash
 
 # this code must be modify if added usable extension
-if [ "$1" == '' && "$1" != 'MP4' && "$2" != 'MOV' ]; then
+if [ "$1" == '' ] || [ "$1" == 'MOV' ] || [ "$1" == 'MP4' ]; then
     echo "Usage: $0 <FILE-EXTENSIONS, MP4|MOV|ETC>";
     exit;
 fi
 
 fileext=$1;
-
 resultfolder="frames";
 [ ! -d "$resultfolder" ] && mkdir "$resultfolder";
 
