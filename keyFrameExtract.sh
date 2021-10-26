@@ -17,5 +17,5 @@ resultfolder="frames";
 for file in ./*."$fileext"; do
     result="$resultfolder/${file}"
     mkdir -p "$result"
-    ffmpeg -i "$file" -q:v 2 -vf select="eq(pict_type\,PICT_TYPE_I)" -vsync 0 "$result/frame%03d.jpg";
+    ffmpeg -i "$file" -vf select="eq(pict_type\,PICT_TYPE_I)" -vsync vfr "$result/frame%03d.jpg";
 done
