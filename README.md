@@ -23,3 +23,4 @@ ffmpeg -i filename -vf select="eq(pict_type\,PICT_TYPE_I)" -vsync vfr frame1%03d
 - [use with ffmpeg(2)](https://developpaper.com/arbitrary-extraction-of-video-frames-by-ffmpeg-python/)
 - [camera stablisation with ffmpeg](http://blog.gregzaal.com/2014/05/30/camera-stabilisation-with-ffmpeg/)
 - [reference code](https://blog.programster.org/ffmpeg-extract-images`)
+- https://filme.imyfone.com/video-editing-tips/splitting-video-with-ffmpeg/
